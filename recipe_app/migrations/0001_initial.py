@@ -6,6 +6,7 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
+
     initial = True
 
     dependencies = [
@@ -14,7 +15,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='CategoryModel',
+            name='CathegoryModel',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=200)),
@@ -29,12 +30,9 @@ class Migration(migrations.Migration):
                 ('cooking', models.TextField()),
                 ('time', models.CharField(max_length=20)),
                 ('image', models.ImageField(upload_to='')),
-                ('complexity',
-                 models.CharField(choices=[('easy', 'easy'), ('medium', 'medium'), ('complex', 'complex')],
-                                  max_length=10)),
-                ('author', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
-                                             to=settings.AUTH_USER_MODEL)),
-                ('categories', models.ManyToManyField(default='new', to='category_model')),
+                ('complexity', models.CharField(choices=[('easy', 'easy'), ('medium', 'medium'), ('complex', 'complex')], max_length=10)),
+                ('author', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('cathegories', models.ManyToManyField(default='new', to='recipe_app.cathegorymodel')),
             ],
         ),
         migrations.CreateModel(
@@ -42,11 +40,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date_added', models.DateField(auto_now_add=True)),
-                ('category_model',
-                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='recipe_app.category_model')),
-                (
-                    'recipe',
-                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='recipe_app.recipe_model')),
+                ('cathegory', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='recipe_app.cathegorymodel')),
+                ('recipe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='recipe_app.recipemodel')),
             ],
         ),
     ]

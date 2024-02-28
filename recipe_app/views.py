@@ -1,6 +1,6 @@
 from random import choice, randint
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import RecipeModel, CategoryModel
+from .models import RecipeModel, CathegoryModel
 from django.contrib.auth.views import LoginView
 from .forms import LoginForm, RecipeForm, UserRegistrationForm
 
@@ -90,14 +90,14 @@ def author_recipes(request, author_id):
     return render(request, 'recipe_app/some_recipes.html', context)
 
 
-def category_recipes(request, category_name):
-    category = get_object_or_404(CategoryModel, title=category_name)
+def cathegory_recipes(request, cathegory_name):
+    cathegory = get_object_or_404(CathegoryModel, title=cathegory_name)
     recipes = []
     for recipe in RecipeModel.objects.all():
-        for category in recipe.categories.all():
-            if category.title == category_name:
+        for cathegory in recipe.cathegories.all():
+            if cathegory.title == cathegory_name:
                 recipes.append(recipe)
-    context = {'type': category_name, 'recipes': recipes}
+    context = {'type': cathegory_name, 'recipes': recipes}
     return render(request, 'recipe_app/some_recipes.html', context)
 
 

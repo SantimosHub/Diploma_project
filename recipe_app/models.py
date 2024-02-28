@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class CategoryModel(models.Model):
+class CathegoryModel(models.Model):
     title = models.CharField(max_length=100)
 
     def __str__(self):
@@ -22,7 +22,7 @@ class RecipeModel(models.Model):
     time = models.CharField(max_length=20)
     image = models.ImageField()
     author = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
-    categories = models.ManyToManyField(CategoryModel, default='new')
+    cathegories = models.ManyToManyField(CathegoryModel, default='new')
     complexity = models.CharField(max_length=10, choices=COMPLEXITY)
 
     def __str__(self):
@@ -31,5 +31,5 @@ class RecipeModel(models.Model):
 
 class RecipeToCategoryModel(models.Model):
     recipe = models.ForeignKey(RecipeModel, on_delete=models.CASCADE)
-    category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE)
+    cathegory = models.ForeignKey(CathegoryModel, on_delete=models.CASCADE)
     date_added = models.DateField(auto_now_add=True)

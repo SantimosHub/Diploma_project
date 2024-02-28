@@ -1,5 +1,6 @@
 from django import forms
-from .models import RecipeModel, CategoryModel, RecipeToCategoryModel
+# from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import RecipeModel, CathegoryModel, RecipeToCategoryModel
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
@@ -23,18 +24,23 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password2']
 
 
+# class CustomUserChangeForm(UserChangeForm):
+#     class Meta:
+#         model = CustomUser
+#         fields = ('username', 'email', 'status')
+
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = RecipeModel
-        fields = ('title', 'description', 'cooking', 'time', 'image', 'categories', 'complexity')
+        fields = ('title', 'description', 'cooking', 'time', 'image', 'cathegories', 'complexity')
 
 
-class CategoryForm(forms.ModelForm):
+class CathegoryForm(forms.ModelForm):
     class Meta:
-        model = CategoryModel
+        model = CathegoryModel
         fields = ('title',)
 
 
-class RecipeToCategoryForm(forms.ModelForm):
+class RecipeToCathegoryForm(forms.ModelForm):
     model = RecipeToCategoryModel
     fields = ()
